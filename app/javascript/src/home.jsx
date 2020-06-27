@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Layout from './layout';
+import Layout from '@src/layout';
+import { handleErrors } from '@utils/fetchHelper';
 
 import './home.scss';
 
