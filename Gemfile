@@ -32,6 +32,7 @@ gem 'aws-sdk', '~> 3.0'
 
 gem 'textacular'
 
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
