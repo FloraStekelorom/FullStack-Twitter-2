@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Layout from '@src/layout';
 import Tweet from '@src/tweet';
+import ProfileCard from '@src/profileCard';
 
 import { handleErrors } from '@utils/fetchHelper';
 
@@ -30,7 +31,7 @@ class Home extends React.Component {
         <div id="feedPage">
           <div className="row">
             <div className="col-xs-3 profile-trends">
-              <h1> Profile Trends </h1>
+              <ProfileCard />
             </div>
             <div className="col-xs-6 feed-box">
               <div className="col-xs-12 post-tweet-box">
@@ -47,7 +48,6 @@ class Home extends React.Component {
               </div>
             </div>
             <div className="col-xs-3 follow-suggest">
-              <h1>Empty column on the right</h1>
             </div>
           </div>
         </div>
