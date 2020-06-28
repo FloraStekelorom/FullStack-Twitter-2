@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Layout from '@src/layout';
 
-class Home extends React.Component {
+class Userpage extends React.Component {
   render () {
     return (
       <Layout>
         <div className="container">
-          <h1>Home</h1>
+          <h1>Userpage</h1>
         </div>
       </Layout>
     )
@@ -15,7 +15,7 @@ class Home extends React.Component {
 }
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <Home />,
+    <Userpage />,
     document.body.appendChild(document.createElement('div')),
   )
 })
