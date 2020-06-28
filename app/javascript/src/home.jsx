@@ -1,8 +1,9 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 import Layout from '@src/layout';
 import Tweet from '@src/tweet';
 import ProfileCard from '@src/profileCard';
+import TweetForm from '@src/tweetForm';
 
 import { handleErrors } from '@utils/fetchHelper';
 
@@ -34,9 +35,7 @@ class Home extends React.Component {
               <ProfileCard />
             </div>
             <div className="col-xs-6 feed-box">
-              <div className="col-xs-12 post-tweet-box">
-                <h1>Add tweet form</h1>
-              </div>
+              <TweetForm />
               <div className="feed">
                 {tweets.length > 0 ? tweets.map((tweet) => {
                   return (<Tweet
