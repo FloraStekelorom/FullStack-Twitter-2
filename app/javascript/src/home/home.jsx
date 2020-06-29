@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Layout from '@src/layout';
+import Layout from '@src/common-component/layout';
 
 class Home extends React.Component {
   render () {
@@ -13,9 +13,5 @@ class Home extends React.Component {
     )
   }
 }
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <Home />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})
+
+export default Home;

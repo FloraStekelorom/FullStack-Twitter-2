@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Layout from '@src/layout';
-import Tweet from '@src/tweet';
-import ProfileCard from '@src/profileCard';
-import TweetForm from '@src/tweetForm';
+import Layout from '@src/common-component/layout';
+import Tweet from '@src/common-component/tweet';
+import ProfileCard from '@src/common-component/profileCard';
+import TweetForm from '@src/common-component/tweetForm';
 
 import { handleErrors } from '@utils/fetchHelper';
 
@@ -54,9 +54,5 @@ class Feed extends React.Component {
     )
   }
 }
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <Feed />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})
+
+export default Feed;
