@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Layout from '@src/common-component/layout';
+import Navbar from './navbar';
 import Login from './login';
 import Signup from './signup';
 
@@ -44,7 +44,7 @@ class Home extends React.Component {
     const backgroundImg = backgroundURL[this.state.backStep];
 
     return (
-      <Layout>
+      <Navbar>
         <div id="homeback" style={{backgroundImage: `url(${backgroundImg})`}}>
         </div>
         <div className="main">
@@ -65,7 +65,7 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
-      </Layout>
+      </Navbar>
     )
   }
 }
