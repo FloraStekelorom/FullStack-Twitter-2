@@ -4,7 +4,6 @@ import Layout from '@src/common-component/layout';
 import Login from './login';
 import Signup from './signup';
 
-
 import './home.scss';
 
 import background_1 from '../../images/background_1.png'
