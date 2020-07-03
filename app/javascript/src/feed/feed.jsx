@@ -15,14 +15,18 @@ class Feed extends React.Component {
   }
 
   componentDidMount() {
-      fetch('/api/tweets')
-        .then(handleErrors)
-        .then(data => {
-          this.setState({
-            tweets: data.tweets,
-          })
+    this.getTweets();
+  }
+
+  getTweets = () => {
+    fetch('/api/tweets')
+      .then(handleErrors)
+      .then(data => {
+        this.setState({
+          tweets: data.tweets,
         })
-    }
+      })
+  }
 
   render () {
     const { tweets } = this.state;
@@ -35,7 +39,7 @@ class Feed extends React.Component {
               <ProfileCard />
             </div>
             <div className="col-xs-6 feed-box">
-              <TweetForm />
+              <TweetForm getTweets={this.getTweets} />
               <div className="feed">
                 {tweets.length > 0 ? tweets.map((tweet) => {
                   return (<Tweet
