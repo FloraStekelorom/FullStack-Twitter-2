@@ -45,6 +45,7 @@ class Feed extends React.Component {
                   return (<Tweet
                     key={tweet.id}
                     tweet={tweet}
+                    getTweets={this.getTweets}
                   />);
                 }) : <p>no tweets here</p>}
 

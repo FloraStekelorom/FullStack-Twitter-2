@@ -30,3 +30,7 @@
 .delete-tweet {
   float: right;
 }
+
+.delete-tweet:hover {
+  text-decoration: underline;
+}

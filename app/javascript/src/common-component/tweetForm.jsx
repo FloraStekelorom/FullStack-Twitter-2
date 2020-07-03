@@ -8,12 +8,22 @@ class TweetForm extends React.Component {
   state = {
     tweet: '',
     error: '',
+    tweetButton: true,
   }
 
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     })
+  }
+
+  charCount = () => {
+    if (this.state.tweet.trim().length > 0 && this.state.tweet.trim().length <= 140) {
+      this.setState({tweet: this.state.tweet.trim()})
+      this.setState({tweetButton: false});
+    } else {
+      this.setState({tweetButton: true});
+    }
   }
 
   post = (e) => {
@@ -33,7 +43,6 @@ class TweetForm extends React.Component {
        }))
          .then(handleErrors)
          .then(data => {
-           console.log('success')
            this.props.getTweets();
          })
          .catch(error => {
@@ -45,14 +54,14 @@ class TweetForm extends React.Component {
 
   render () {
 
-    const { tweet, error } = this.state;
+    const { tweet, error, tweetButton } = this.state;
 
     return (
       <div className="col-xs-12 post-tweet-box">
         <form className="form-inline my-4" onSubmit={this.post}>
-          <input type="text" className="form-control" placeholder="What's happening?" name="tweet" value={tweet} onChange={this.handleChange} required/><br/>
+          <input type="text" className="form-control" placeholder="What's happening?" name="tweet" value={tweet} onChange={this.handleChange} onKeyUp={this.charCount} required/><br/>
           <div className="pull-right">
-            <button className="btn btn-primary" id="post-tweet-btn">Tweet</button>
+            <button className="btn btn-primary" id="post-tweet-btn" disabled={tweetButton} >Tweet</button>
             {error && <p className="text-danger mt-2">{error}</p>}
           </div>
         </form>
