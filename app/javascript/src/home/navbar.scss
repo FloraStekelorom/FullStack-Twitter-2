@@ -1,6 +1,8 @@
 .navbar-default {
   background-color: white;
   margin-bottom: 0;
+  height: 10px;
+  z-index: 1;
 }
 
 .navbar-header {
@@ -14,4 +16,20 @@
 .fa-twitter {
   color: #00aced;
   font-size: 24px;
+}
+
+.nav {
+  width: 150px;
+
+}
+
+.dropdown-menu {
+  z-index: 2;
+  background-color: white;
+
+
+}
+
+li {
+  background-color: white;
 }

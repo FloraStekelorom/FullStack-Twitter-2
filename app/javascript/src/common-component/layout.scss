@@ -1,6 +1,8 @@
 .navbar-default {
   background-color: white;
   margin-bottom: 0;
+  height: 10px;
+  z-index: 1;
 }
 
 .navbar-header {
@@ -19,4 +21,17 @@
 .search-bar {
   height: 50px;
   padding-top: 7px;
+}
+
+.dropdown {
+  width: 100px;
+}
+
+.dropdown-menu {
+  z-index: 2;
+  background-color: white;
+}
+
+li {
+  background-color: white;
 }
