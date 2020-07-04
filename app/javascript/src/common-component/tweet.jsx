@@ -6,23 +6,23 @@ import './tweet.scss';
 
 class Tweet extends React.Component {
 
-//  delete = (id) => {
-//    if(!id) {
-//      console.log("no tweet id");
-//    }
+  delete = (id) => {
+    if(!id) {
+      console.log("no tweet id");
+    }
 
-//    fetch(`/api/tweets/${id}`, safeCredentials({
-//      method: "DELETE",
-//      mode:"cors",
-//      headers: { "Content-Type": "application/json" },
-//    })).then((data) => {
-//        console.log('success');
-//        this.props.getTweets();
-//      })
-//      .catch((error) => {
-//        console.log('could not delete tweet');
-//      })
-//  }
+    fetch(`/api/tweets/${id}`, safeCredentials({
+      method: "DELETE",
+      mode:"cors",
+      headers: { "Content-Type": "application/json" },
+    })).then((data) => {
+        console.log('success');
+        this.props.getTweets();
+      })
+      .catch((error) => {
+        console.log('could not delete tweet');
+      })
+  }
 
 
   render () {
@@ -35,7 +35,7 @@ class Tweet extends React.Component {
         <a className="tweetUsername" href="#">{username}</a>
         <a className="screenName" href="#">  @{username}</a>
         <p>{message}</p>
-        <button className="btn delete-tweet">Delete</button>
+        <button className="btn delete-tweet" onClick={() => this.delete(id)}>Delete</button>
       </div>
     )
   }
