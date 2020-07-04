@@ -6,7 +6,6 @@ import './profileCard.scss';
 class ProfileCard extends React.Component {
   render () {
 
-
     return (
       <div>
         <div className="profileCard col-xs-12">
