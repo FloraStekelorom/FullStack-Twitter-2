@@ -1,18 +1,38 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 
 import './profileCard.scss';
 
 class ProfileCard extends React.Component {
+  state = {
+    username: 'User',
+  }
+
+  componentDidMount () {
+    this.authenticate();
+  }
+
+  authenticate = (e) => {
+    fetch(`/api/authenticated`, safeCredentials({
+      method: 'GET',
+    }))
+    .then(handleErrors)
+    .then(res => {
+      this.setState({ username: res.username });
+    })
+  }
+
   render () {
+    const { username } = this.state;
 
     return (
       <div>
         <div className="profileCard col-xs-12">
           <div className="profileCard-content">
             <div className="user-field col-xs-12">
-              <a className="username" href="#">currentUser</a><br/>
-              <a className="screenName" href="#">@currentUser</a>
+              <a className="username" href="#">{username}</a><br/>
+              <a className="screenName" href="#">@{username}</a>
             </div>
             <div className="user-stats">
               <div className="col-xs-3">
