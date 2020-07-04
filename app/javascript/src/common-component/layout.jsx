@@ -26,6 +26,22 @@ class Layout extends React.Component {
     })
   }
 
+  logout = (e) => {
+    event.preventDefault();
+
+    fetch(`/api/sessions`, safeCredentials({
+      method: 'DELETE',
+    }))
+    .then(handleErrors)
+    .then(res => {
+      if (res.success) {
+        const params = new URLSearchParams(window.location.search);
+        const redirect_url = params.get('redirect_url') || '/';
+        window.location = redirect_url;
+      }
+    })
+  }
+
   render () {
     const { username } = this.state;
 
@@ -51,7 +67,7 @@ class Layout extends React.Component {
                     <li ><a href="#">Keyboard shortcuts</a></li>
                     <li role="presentation" className="divider"></li>
                     <li ><a href="#">Settings</a></li>
-                    <li ><a id="log-out" href="#">Log out</a></li>
+                    <li ><a id="log-out" href="#" onClick={this.logout}>Log out</a></li>
                   </ul>
                 </li>
               </ul>
