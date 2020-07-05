@@ -5,31 +5,45 @@ import Tweet from '@src/common-component/tweet';
 import ProfileCard from '@src/common-component/profileCard';
 import TweetForm from '@src/common-component/tweetForm';
 
-import { handleErrors } from '@utils/fetchHelper';
+import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 
 import './userpage.scss';
 
 class Userpage extends React.Component {
   state = {
     tweets: [],
+    username: 'User',
   }
 
   componentDidMount() {
-    this.getTweets();
+    this.authenticate();
+  }
+
+  authenticate = (e) => {
+    fetch(`/api/authenticated`, safeCredentials({
+      method: 'GET',
+    }))
+    .then(handleErrors)
+    .then(res => {
+      this.setState({ username: res.username });
+      console.log(this.state.username);
+      this.getTweets();
+    })
   }
 
   getTweets = () => {
-    fetch('/api/tweets')
+    fetch(`/api/users/${this.state.username}/tweets`)
       .then(handleErrors)
       .then(data => {
+        console.log(data)
         this.setState({
           tweets: data.tweets,
         })
       })
   }
-  
+
   render () {
-    const { tweets } = this.state;
+    const { tweets, username } = this.state;
 
     return (
       <Layout>
