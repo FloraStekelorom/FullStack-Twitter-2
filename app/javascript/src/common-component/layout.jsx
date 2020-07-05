@@ -59,7 +59,7 @@ class Layout extends React.Component {
                 <li className="dropdown">
                   <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span id="user-icon">{username}</span></a>
                   <ul className="dropdown-menu row" role="menu">
-                    <li ><a href="#" className="username">{username}</a></li>
+                    <li ><a href={`/${username}`} className="username">{username}</a></li>
                     <li role="presentation" className="divider"></li>
                     <li ><a href="#">Lists</a></li>
                     <li role="presentation" className="divider"></li>

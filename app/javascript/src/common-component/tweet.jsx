@@ -32,8 +32,8 @@ class Tweet extends React.Component {
 
     return (
       <div className="tweetBox col-xs-12">
-        <a className="tweetUsername" href="#">{username}</a>
-        <a className="screenName" href="#">  @{username}</a>
+        <a className="tweetUsername" href={`/${username}`}>{username}</a>
+        <a className="screenName" href={`/${username}`}>  @{username}</a>
         <p>{message}</p>
         <button className="btn delete-tweet" onClick={() => this.delete(id)}>Delete</button>
       </div>

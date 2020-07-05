@@ -31,8 +31,8 @@ class ProfileCard extends React.Component {
         <div className="profileCard col-xs-12">
           <div className="profileCard-content">
             <div className="user-field col-xs-12">
-              <a className="username" href="#">{username}</a><br/>
-              <a className="screenName" href="#">@{username}</a>
+              <a className="username" href={`/${username}`}>{username}</a><br/>
+              <a className="screenName" href={`/${username}`}>@{username}</a>
             </div>
             <div className="user-stats">
               <div className="col-xs-3">
