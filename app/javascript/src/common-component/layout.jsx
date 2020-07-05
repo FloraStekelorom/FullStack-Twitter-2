@@ -51,7 +51,7 @@ class Layout extends React.Component {
           <nav className="navbar-default navbar-fixed-top">
             <div className="container">
               <div className="navbar-header">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href={`/feed`}>
                   <i className="fa fa-twitter"></i>
                 </a>
               </div>
