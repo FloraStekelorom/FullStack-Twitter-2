@@ -50,6 +50,8 @@ class TweetForm extends React.Component {
              error: 'Could not post tweet',
            })
          })
+
+      this.setState({ tweet: '' });
   }
 
   render () {
