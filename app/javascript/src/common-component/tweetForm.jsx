@@ -18,8 +18,8 @@ class TweetForm extends React.Component {
   }
 
   charCount = () => {
-    if (this.state.tweet.trim().length > 0 && this.state.tweet.trim().length <= 140) {
-      this.setState({tweet: this.state.tweet.trim()})
+    if (this.state.tweet.length > 0 && this.state.tweet.length <= 140) {
+      this.setState({tweet: this.state.tweet})
       this.setState({tweetButton: false});
     } else {
       this.setState({tweetButton: true});
