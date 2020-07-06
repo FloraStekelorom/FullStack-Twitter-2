@@ -25,17 +25,22 @@ class Userpage extends React.Component {
     }))
     .then(handleErrors)
     .then(res => {
-      this.setState({ username: res.username });
-      console.log(this.state.username);
+      this.getUsername();
       this.getTweets();
     })
+  }
+
+  getUsername = (e) => {
+    const userName = window.location.pathname.replace('/', '');
+    this.setState({ username: userName });
+    console.log(this.state.username);
   }
 
   getTweets = () => {
     fetch(`/api/users/${this.state.username}/tweets`)
       .then(handleErrors)
       .then(data => {
-        console.log(data)
+        //console.log(data)
         this.setState({
           tweets: data.tweets,
         })

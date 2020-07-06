@@ -7,6 +7,8 @@ import './profileCard.scss';
 class ProfileCard extends React.Component {
   state = {
     username: 'User',
+    tweets: [],
+    tweetNumber: 0,
   }
 
   componentDidMount () {
@@ -20,11 +22,34 @@ class ProfileCard extends React.Component {
     .then(handleErrors)
     .then(res => {
       this.setState({ username: res.username });
+      this.getUsername();
+      this.countUserTweet();
     })
   }
 
+  getUsername = (e) => {
+    let userName = window.location.pathname.replace('/', '');
+
+    if (userName != "feed") {
+      this.setState({ username: userName });
+      console.log(this.state.username);
+    }
+  }
+
+  countUserTweet = () => {
+    fetch(`/api/users/${this.state.username}/tweets`)
+      .then(handleErrors)
+      .then(data => {
+      //  console.log(data)
+        this.setState({
+          tweets: data.tweets,
+          tweetNumber: data.tweets.length,
+        })
+      })
+  }
+
   render () {
-    const { username } = this.state;
+    const { username, tweets, tweetNumber } = this.state;
 
     return (
       <div>
@@ -38,7 +63,7 @@ class ProfileCard extends React.Component {
               <div className="col-xs-3">
                 <a href="">
                   <span>Tweets<br/></span>
-                  <span className="user-stats-tweets">10</span>
+                  <span className="user-stats-tweets">{tweetNumber}</span>
                 </a>
               </div>
               <div className="col-xs-4">
