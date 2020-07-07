@@ -1,23 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { safeCredentials, handleErrors } from '@utils/fetchHelper';
+import { safeCredentials, safeCredentialsForm, handleErrors } from '@utils/fetchHelper';
 
 import './tweetForm.scss';
 
 class TweetForm extends React.Component {
-  state = {
-    tweet: '',
-    error: '',
-    tweetButton: true,
+  constructor(props) {
+    super(props);
+    this.state = {
+      tweet: '',
+      error: '',
+      tweetButton: true,
+    }
+    this.uploadedFile = React.createRef();
+    this.handleChange = this.handleChange.bind(this);
+    this.charCount = this.charCount.bind(this);
+    this.post = this.post.bind(this);
   }
 
-  handleChange = (e) => {
+  handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
     })
   }
 
-  charCount = () => {
+  charCount() {
     if (this.state.tweet.length > 0 && this.state.tweet.length <= 140) {
       this.setState({tweet: this.state.tweet})
       this.setState({tweetButton: false});
@@ -26,20 +33,21 @@ class TweetForm extends React.Component {
     }
   }
 
-  post = (e) => {
+  post(e) {
    if (e) { e.preventDefault(); }
    this.setState({
      error: '',
    });
 
+   const formData = new FormData();
+   formData.set('tweet[image]', this.uploadedFile.current.files[0]);
+   formData.set('tweet[message]', this.state.tweet);
 
-   fetch('/api/tweets', safeCredentials({
+   fetch('/api/tweets', safeCredentialsForm({
          method: 'POST',
-         body: JSON.stringify({
-           tweet: {
-             message: this.state.tweet,
-           }
-         })
+         body: formData,
+         contentType: false,
+         processData: false,
        }))
          .then(handleErrors)
          .then(data => {
@@ -55,7 +63,6 @@ class TweetForm extends React.Component {
   }
 
   render () {
-
     const { tweet, error, tweetButton } = this.state;
 
     return (
@@ -63,6 +70,8 @@ class TweetForm extends React.Component {
         <form className="form-inline my-4" onSubmit={this.post}>
           <input type="text" className="form-control" placeholder="What's happening?" name="tweet" value={tweet} onChange={this.handleChange} onKeyUp={this.charCount} required/><br/>
           <div className="pull-right">
+            <label id="upload-image-btn" htmlFor="image-select">Upload image</label>
+            <input type="file" id="image-select" name="image" accept="image/*" ref={this.uploadedFile}/>
             <button className="btn btn-primary" id="post-tweet-btn" disabled={tweetButton} >Tweet</button>
             {error && <p className="text-danger mt-2">{error}</p>}
           </div>
