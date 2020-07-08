@@ -28,13 +28,14 @@ class Tweet extends React.Component {
   render () {
 
     const { tweet } = this.props;
-    const { id, message, username } = tweet;
+    const { id, message, username, image } = tweet;
 
     return (
       <div className="tweetBox col-xs-12">
         <a className="tweetUsername" href={`/${username}`}>{username}</a>
         <a className="screenName" href={`/${username}`}>  @{username}</a>
         <p>{message}</p>
+        <img src={image} className="img img-responsive"/>
         <button className="btn delete-tweet" onClick={() => this.delete(id)}>Delete</button>
       </div>
     )
