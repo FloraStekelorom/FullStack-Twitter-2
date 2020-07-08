@@ -20,5 +20,8 @@ Rails.application.routes.draw do
 
   get '/feed' => 'static_pages#feed'
   get '/:username' => 'static_pages#userpage'
-  get '*path' => 'static_pages#home'
+
+  get '*path', to: redirect('/'), constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
 end
