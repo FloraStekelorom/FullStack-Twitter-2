@@ -13,6 +13,8 @@ class Userpage extends React.Component {
   state = {
     tweets: [],
     username: 'User',
+    usernameProfile: 'User',
+    tweetNumber: 0,
   }
 
   componentDidMount() {
@@ -25,6 +27,7 @@ class Userpage extends React.Component {
     }))
     .then(handleErrors)
     .then(res => {
+      this.setState({ usernameProfile: res.username });
       this.getUsername();
       this.getTweets();
     })
@@ -33,7 +36,7 @@ class Userpage extends React.Component {
   getUsername = (e) => {
     const userName = window.location.pathname.replace('/', '');
     this.setState({ username: userName });
-    console.log(this.state.username);
+    //console.log(this.state.username);
   }
 
   getTweets = () => {
@@ -43,19 +46,20 @@ class Userpage extends React.Component {
         //console.log(data)
         this.setState({
           tweets: data.tweets,
+          tweetNumber: data.tweets.length,
         })
       })
   }
 
   render () {
-    const { tweets, username } = this.state;
+    const { tweets, tweetNumber, username } = this.state;
 
     return (
       <Layout>
         <div id="feedPage">
           <div className="row">
             <div className="col-xs-3 profile-trends">
-              <ProfileCard />
+              <ProfileCard tweetNumber={this.state.tweetNumber}/>
             </div>
             <div className="col-xs-6 feed-box">
               <TweetForm getTweets={this.getTweets} />

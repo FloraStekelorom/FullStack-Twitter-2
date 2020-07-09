@@ -8,7 +8,6 @@ class ProfileCard extends React.Component {
   state = {
     username: 'User',
     tweets: [],
-    tweetNumber: 0,
   }
 
   componentDidMount () {
@@ -23,7 +22,6 @@ class ProfileCard extends React.Component {
     .then(res => {
       this.setState({ username: res.username });
       this.getUsername();
-      this.countUserTweet();
     })
   }
 
@@ -34,22 +32,13 @@ class ProfileCard extends React.Component {
       this.setState({ username: userName });
       console.log(this.state.username);
     }
+
+
   }
 
-  countUserTweet = () => {
-    fetch(`/api/users/${this.state.username}/tweets`)
-      .then(handleErrors)
-      .then(data => {
-      //  console.log(data)
-        this.setState({
-          tweets: data.tweets,
-          tweetNumber: data.tweets.length,
-        })
-      })
-  }
 
   render () {
-    const { username, tweets, tweetNumber } = this.state;
+    const { username, tweets } = this.state;
 
     return (
       <div>
@@ -63,7 +52,7 @@ class ProfileCard extends React.Component {
               <div className="col-xs-3">
                 <a href="">
                   <span>Tweets<br/></span>
-                  <span className="user-stats-tweets">{tweetNumber}</span>
+                  <span className="user-stats-tweets">{this.props.tweetNumber}</span>
                 </a>
               </div>
               <div className="col-xs-4">
