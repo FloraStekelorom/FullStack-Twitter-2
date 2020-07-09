@@ -28,7 +28,7 @@ class Feed extends React.Component {
     .then(res => {
       this.setState({ username: res.username });
       this.getTweets();
-      this.countTweet();
+
     })
   }
 
@@ -40,6 +40,7 @@ class Feed extends React.Component {
           tweets: data.tweets,
         })
       })
+      this.countTweet();
   }
 
   countTweet = () => {
