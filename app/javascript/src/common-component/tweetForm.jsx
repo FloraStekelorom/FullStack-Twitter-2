@@ -39,9 +39,13 @@ class TweetForm extends React.Component {
      error: '',
    });
 
-   const formData = new FormData();
-   formData.set('tweet[image]', this.uploadedFile.current.files[0]);
-   formData.set('tweet[message]', this.state.tweet);
+   let formData = new FormData();
+   if (this.uploadedFile.current.files[0] == null) {
+     formData.set('tweet[message]', this.state.tweet);
+   } else {
+     formData.set('tweet[image]', this.uploadedFile.current.files[0]);
+     formData.set('tweet[message]', this.state.tweet);
+   }
 
    fetch('/api/tweets', safeCredentialsForm({
          method: 'POST',
@@ -58,8 +62,9 @@ class TweetForm extends React.Component {
              error: 'Could not post tweet',
            })
          })
-
       this.setState({ tweet: '' });
+      document.getElementById("image-select").value = null;
+
   }
 
   render () {
