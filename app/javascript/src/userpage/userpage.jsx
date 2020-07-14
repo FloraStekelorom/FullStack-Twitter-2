@@ -18,7 +18,16 @@ class Userpage extends React.Component {
   }
 
   componentDidMount() {
+    this.searchUrl();
     this.authenticate();
+  }
+
+  searchUrl = () => {
+    if (window.location.href.indexOf("searchInput=") > -1) {
+      console.log('identified');
+      const params = new URLSearchParams(location.search);
+      window.location.href= '/feed?'+(params);
+    }
   }
 
   authenticate = (e) => {
