@@ -46,6 +46,19 @@ module Api
       end
     end
 
+    def search
+
+      if params[:keyword].blank?
+        render 'api/tweets/index'
+      else
+        @parameter = params[:keyword].downcase
+        @tweets = Tweet.all.where("lower(message) LIKE :search", search: @parameter)
+        render 'api/tweets/index'
+      end
+
+    end
+
+
     private
 
       def tweet_params

@@ -9,11 +9,26 @@ class Layout extends React.Component {
     super(props);
     this.state = {
       username: 'User',
+      searchInput: '',
     }
+    this.handleChange = this.handleChange.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   componentDidMount () {
     this.authenticate();
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+    console.log(this.state.searchInput);
+  }
+
+  submit() {
+    console.log(this.state.searchInput);
+
   }
 
   authenticate = (e) => {
@@ -43,8 +58,7 @@ class Layout extends React.Component {
   }
 
   render () {
-    const { username } = this.state;
-
+    const { username, searchInput } = this.state;
 
     return (
       <React.Fragment>
@@ -72,12 +86,12 @@ class Layout extends React.Component {
                 </li>
               </ul>
               <div className="search-bar col-xs-3 nav navbar-right">
-                <div className="input-group">
-                  <input type="text" className="form-control search-input" placeholder="Search for..." />
+                <form className="input-group" onSubmit={this.submit}>
+                  <input type="text" className="form-control search-input" placeholder="Search for..." onChange={this.handleChange} name="searchInput" value={searchInput} required/>
                   <span className="input-group-btn">
-                    <button className="btn btn-default search-btn" type="button">Go!</button>
+                    <button className="btn btn-default search-btn" type="submit">Go!</button>
                   </span>
-                </div>
+                </form>
               </div>
             </div>
           </nav>

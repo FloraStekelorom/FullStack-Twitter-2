@@ -33,13 +33,28 @@ class Feed extends React.Component {
   }
 
   getTweets = () => {
-    fetch('/api/tweets')
-      .then(handleErrors)
-      .then(data => {
-        this.setState({
-          tweets: data.tweets,
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const searchInput = urlParams.get('searchInput');
+
+    if (!searchInput) {
+      fetch('/api/tweets')
+        .then(handleErrors)
+        .then(data => {
+          this.setState({
+            tweets: data.tweets,
+          })
         })
-      })
+    } else {
+      fetch(`/api/tweets/search/${searchInput}`)
+        .then(handleErrors)
+        .then(data => {
+          //console.log(data)
+          this.setState({
+            tweets: data.tweets,
+          })
+        })
+    }
       this.countTweet();
   }
 
