@@ -2,21 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 
-import './layout.scss';
+import './navbar.scss';
 
-class Layout extends React.Component {
+class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'User',
       searchInput: '',
     }
     this.handleChange = this.handleChange.bind(this);
     this.submit = this.submit.bind(this);
-  }
-
-  componentDidMount () {
-    this.authenticate();
   }
 
   handleChange(e) {
@@ -28,17 +23,6 @@ class Layout extends React.Component {
 
   submit() {
     console.log(this.state.searchInput);
-
-  }
-
-  authenticate = (e) => {
-    fetch(`/api/authenticated`, safeCredentials({
-      method: 'GET',
-    }))
-    .then(handleErrors)
-    .then(res => {
-      this.setState({ username: res.username });
-    })
   }
 
   logout = (e) => {
@@ -58,7 +42,7 @@ class Layout extends React.Component {
   }
 
   render () {
-    const { username, searchInput } = this.state;
+    const { searchInput } = this.state;
 
     return (
       <React.Fragment>
@@ -71,9 +55,9 @@ class Layout extends React.Component {
               </div>
               <ul className="nav navbar-nav navbar-right">
                 <li className="dropdown">
-                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span id="user-icon">{username}</span></a>
+                  <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span id="user-icon">{this.props.username}</span></a>
                   <ul className="dropdown-menu row" role="menu">
-                    <li ><a href={`/${username}`} className="username">{username}</a></li>
+                    <li ><a href={`/${this.props.username}`} className="username">{this.props.username}</a></li>
                     <li role="presentation" className="divider"></li>
                     <li ><a href="#">Lists</a></li>
                     <li role="presentation" className="divider"></li>
@@ -95,21 +79,9 @@ class Layout extends React.Component {
               </div>
             </div>
           </nav>
-
-          <div>
-            {this.props.children}
-          </div>
         </React.Fragment>
     )
   }
 }
 
-
-document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <Layout />,
-    document.body.appendChild(document.createElement('div')),
-  )
-})
-
-export default Layout;
+export default Navbar;

@@ -44,7 +44,8 @@ class Home extends React.Component {
     const backgroundImg = backgroundURL[this.state.backStep];
 
     return (
-      <Navbar>
+      <React.Fragment>
+        <Navbar />
         <div id="homeback" style={{backgroundImage: `url(${backgroundImg})`}}>
         </div>
         <div className="main">
@@ -65,7 +66,7 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
-      </Navbar>
+      </React.Fragment>
     )
   }
 }

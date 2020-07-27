@@ -5,48 +5,16 @@ import { safeCredentials, handleErrors } from '@utils/fetchHelper';
 import './profileCard.scss';
 
 class ProfileCard extends React.Component {
-  state = {
-    username: 'User',
-    tweets: [],
-  }
-
-  componentDidMount () {
-    this.authenticate();
-  }
-
-  authenticate = (e) => {
-    fetch(`/api/authenticated`, safeCredentials({
-      method: 'GET',
-    }))
-    .then(handleErrors)
-    .then(res => {
-      this.setState({ username: res.username });
-      this.getUsername();
-    })
-  }
-
-  getUsername = (e) => {
-    let userName = window.location.pathname.replace('/', '');
-
-    if (userName != "feed") {
-      this.setState({ username: userName });
-      console.log(this.state.username);
-    }
-
-
-  }
-
 
   render () {
-    const { username, tweets } = this.state;
 
     return (
       <div>
         <div className="profileCard col-xs-12">
           <div className="profileCard-content">
             <div className="user-field col-xs-12">
-              <a className="username" href={`/${username}`}>{username}</a><br/>
-              <a className="screenName" href={`/${username}`}>@{username}</a>
+              <a className="username" href={`/${this.props.username}`}>{this.props.username}</a><br/>
+              <a className="screenName" href={`/${this.props.username}`}>@{this.props.username}</a>
             </div>
             <div className="user-stats">
               <div className="col-xs-3">

@@ -26,10 +26,7 @@ const Navbar = (props) => {
           </ul>
         </div>
       </nav>
-    <div>
-      {props.children}
-    </div>
-      </React.Fragment>
+    </React.Fragment>
   );
 }
 
