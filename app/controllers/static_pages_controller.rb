@@ -1,31 +1,16 @@
 class StaticPagesController < ApplicationController
+  skip_before_action :require_login, only: [:home]
+
   def home
     render 'home'
   end
 
   def feed
-    token = cookies.signed[:twitter_session_token]
-    session = Session.find_by(token: token)
-
-    if session
-      @user = session.user
-      render 'feed', status: :ok
-    else
-      redirect_to :root
-    end
+      render 'feed'
   end
 
   def userpage
-    token = cookies.signed[:twitter_session_token]
-    session = Session.find_by(token: token)
-
-    if session
-      @user = session.user
-      render 'userpage', status: :ok
-    else
-      redirect_to :root
-    end
-
+      render 'userpage'
   end
 
 end

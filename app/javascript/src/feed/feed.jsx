@@ -74,28 +74,28 @@ class Feed extends React.Component {
     return (
       <React.Fragment>
         <Navbar username={this.state.username} />
-          <div id="feedPage">
-            <div className="row">
-              <div className="col-xs-3 profile-trends">
-                <ProfileCard tweetNumber={this.state.tweetNumber} username={this.state.username}/>
-              </div>
-              <div className="col-xs-6 feed-box">
-                <TweetForm getTweets={this.getTweets} />
-                <div className="feed">
-                  {tweets.length > 0 ? tweets.map((tweet) => {
-                    return (<Tweet
-                      key={tweet.id}
-                      tweet={tweet}
-                      getTweets={this.getTweets}
-                    />);
-                  }) : <p>no tweets here</p>}
+        <div id="feedPage">
+          <div className="row">
+            <div className="col-xs-3 profile-trends">
+              <ProfileCard tweetNumber={this.state.tweetNumber} username={this.state.username}/>
+            </div>
+            <div className="col-xs-6 feed-box">
+              <TweetForm getTweets={this.getTweets} />
+              <div className="feed">
+                {tweets.length > 0 ? tweets.map((tweet) => {
+                  return (<Tweet
+                    key={tweet.id}
+                    tweet={tweet}
+                    getTweets={this.getTweets}
+                  />);
+                }) : <p>no tweets here</p>}
 
-                </div>
-              </div>
-              <div className="col-xs-3 follow-suggest">
               </div>
             </div>
+            <div className="col-xs-3 follow-suggest">
+            </div>
           </div>
+        </div>
       </React.Fragment>
     )
   }
